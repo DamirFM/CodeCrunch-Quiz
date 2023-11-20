@@ -4,8 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeCrunch-Quiz</title>
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    
+    <header>
+        <h3>View highscore</h3>
+        <h3>Timer:<span id="timer"></span></h3>
+    </header>
+    <section id="intro">
+        <h1>Coding quize challange</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam explicabo optio dolorum, asperiores laborum recusandae ex fuga libero rerum expedita cumque dolor commodi ad corporis accusantium quisquam enim exercitationem.</p>
+        <button id="start-quiz">Start quiz</button>
+    </section>
+
+    <section class="hide" id="quize">
+        <h2>Question</h2>
+        <ol>
+            <li id="li1"><button>Choise 1</button></li>
+            <li id="li2"><button>Choise 2</button></li>
+            <li id="li3"><button>Choise 3</button></li>
+            <li id="li4"><button>Choise 4</button></li>
+        </ol>
+        <button id="finish-quiz">Start quiz</button>
+    </section>
+
+    <section class="hide" id="initials">
+        <label>Enter your initials</lable>
+       <input id="initial-input">
+    </section>
+
+    <section class="hide" id="highscore">
+        <h2>Highscore</h2>
+        <ol id="scores">
+            <li>DY - 90</li>
+        </ol>
+    </section>
+    <script src="./assets/script.js"></script> 
 </body>
 </html>
