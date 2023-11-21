@@ -8,8 +8,12 @@ let startButton =  document.getElementById("start-quiz");
 let finishButton = document.getElementById("finish-quiz");
 let timerOfGame = document.getElementById("timer");
 
+<<<<<<< HEAD
 
 let gameTimer = 5;
+=======
+let gameTimer = 100;
+>>>>>>> 7bdb52c (add setting up the timer)
 //Button which initialize game start
 startButton.addEventListener("click", startGame);
 //After a click on the button startGame () function will start
@@ -86,7 +90,51 @@ function displayQuestion () {
     choiceButton.addEventListener("click", nextQuestion)
     finishButton.addEventListener("click", stageTwo)
 
+<<<<<<< HEAD
 }
+=======
+function displayQuestion() {
+
+    const actualQuestion = questionData[currentQuestion];
+    questionElement.textContent = actualQuestion.title;
+
+    choiceElement.innerHTML = ''; // Clear previous choices
+    // Iterates through the choices array for the current question
+
+    actualQuestion.choices.forEach((choice, index) => {
+        // For each choice in the array, a button is created dynamically
+        const choiceButton = document.createElement('button');
+        // Text content set to the choice.
+        choiceButton.textContent = choice;
+        // An event listener is added to each button that listens for a click 
+        choiceButton.addEventListener('click', () => checkAnswer(index));
+        // Once a button is clicked, the checkAnswer(index) function is called with the index passed as an argument.
+        choiceElement.appendChild(choiceButton);
+    });
+}
+// Function to check the answers
+function checkAnswer(choiceIndex) {
+    // Declaring choiceIndex
+    // Declaring the current question and assigning the current object from questionData array 
+    const actualQuestion = questionData[currentQuestion];
+    // if users choise index is equal to answer index  alert('Correct!')
+    if (choiceIndex === actualQuestion.answer) {
+        alert('Correct!');
+        // if users choise index is not equal to answer index  alert('Incorrect!') and decrement 10 sec
+    } else {
+        gameTimer = gameTimer - 10;
+        alert('Incorrect!');
+    }
+    // Switch to the next question
+    currentQuestion++;
+    // if currentQuestion less than length of array of questionData - continue
+    if (currentQuestion < questionData.length) {
+        displayQuestion();
+    } else {
+        // else - stop the quiz
+        stageInitials();
+        alert('Quiz finished');
+>>>>>>> 7bdb52c (add setting up the timer)
 
 
 function nextQuestion () {
@@ -94,10 +142,16 @@ function nextQuestion () {
     displayQuestion (); 
 }
 
+<<<<<<< HEAD
 
 
 
 function stageTwo (){
+=======
+let initialInput = document.querySelector("#initial-input");
+
+function stageInitials() {
+>>>>>>> 7bdb52c (add setting up the timer)
     quizPage.classList.add("hide");
     initialsPage.classList.remove("hide");
 
