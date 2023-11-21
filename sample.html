@@ -1,3 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz</title>
+</head>
+<body>
+
+<div id="question"></div>
+<div id="choices"></div>
+<button id="nextButton">Next</button>
+
+<script>
+let questionData = [{
+    title: "Which HTML tag is used to link an external JavaScript file to an HTML document?",
+    choices: ["script", "link", "js", "javascript"],
+    answer: 0
+}, {
+    title: "What does CSS stand for?",
+    choices: ["Computer Style Sheets", "Creative Style Sheets", "Cascading Style Sheets", "Colorful Style Sheets"],
+    answer: 2
+}, {
+    title: "Which JavaScript method is used to add elements to the end of an array?",
+    choices: ["push()", "append()", "addToEnd()", "concat()"],
+    answer: 0
+}, {
+    title: " In CSS, which property is used to change the text color of an element?",
+    choices: ["text-color", "color", "font-color", "text-style"],
+    answer: 1
+}, {
+    title: "What is the correct syntax to create a function in JavaScript?",
+    choices: ["function = myFunction() {}", "var function = myFunction() {}", "function myFunction() {}", "create function myFunction() {}"],
+    answer: 2
+}];
+
+let currentQuestion = 0;
+const questionElement = document.getElementById('question');
+const choicesElement = document.getElementById('choices');
+const nextButton = document.getElementById('nextButton');
+
+function displayQuestion() {
+  const currentQ = questionData[currentQuestion];
+  questionElement.textContent = currentQ.title;
+
+  choicesElement.innerHTML = ''; // Clear previous choices
+
+  currentQ.choices.forEach((choice, index) => {
+    const choiceButton = document.createElement('button');
+    choiceButton.textContent = choice;
+    choiceButton.addEventListener('click', () => checkAnswer(index));
+    choicesElement.appendChild(choiceButton);
+  });
+}
+
+function checkAnswer(choiceIndex) {
+  const currentQ = questionData[currentQuestion];
+  if (choiceIndex === currentQ.answer) {
+    alert('Correct!');
+    // Handle correct answer action here
+  } else {
+    alert('Incorrect!');
+    // Handle incorrect answer action here
+  }
+
+  currentQuestion++;
+  if (currentQuestion < questionData.length) {
+    displayQuestion();
+  } else {
+    alert('Quiz finished');
+    // Handle end of quiz actions here
+  }
+}
+
+nextButton.addEventListener('click', () => {
+  if (currentQuestion < questionData.length) {
+    displayQuestion();
+  } else {
+    alert('Quiz finished');
+    // Handle end of quiz actions here
+  }
+});
+
+// Display the first question when the page loads
+displayQuestion();
+</script>
+
+</body>
+</html>
+
+
+<!-- 
 //Picking the HTML elements by Id 
 let introPage = document.getElementById("intro");
 let quizPage = document.getElementById("quiz");
@@ -5,14 +95,12 @@ let initialsPage = document.getElementById("initials");
 let highscorePage = document.getElementById("highscore");
 let signUpButton = document.querySelector("#sign-up");
 let startButton = document.getElementById("start-quiz");
-let questionElement = document.getElementById('question');
-let choiceElement = document.getElementById('choices');
 
 // let finishButton = document.getElementById("finish-quiz");
 let timerOfGame = document.getElementById("timer");
 
 
-let gameTimer = 100;
+let gameTimer = 50;
 //Button which initialize game start
 startButton.addEventListener("click", startGame);
 //After a click on the button startGame () function will start
@@ -38,6 +126,7 @@ function startGame() {
                 // Calls function to create and append image
                 stageInitials();
             }
+
         }, 1000);
     }
     setTime();
@@ -70,51 +159,85 @@ let questionData = [{
 let currentQuestion = 0;
 
 //function which shows the questions
-
 function displayQuestion() {
+    //using innerHTML
+    quizPage.innerHTML = `
+    <h2>${questionData[currentQuestion].title}</h2>
+        <ol id="choiceButton">
+            <li data-number="0" data-state="hidden"><button>${questionData[currentQuestion].choices[0]}</button></li> 
+            <li data-number="1" data-state="hidden"><button>${questionData[currentQuestion].choices[1]}</button></li>
+            <li data-number="2" data-state="hidden"><button>${questionData[currentQuestion].choices[2]}</button></li>
+            <li data-number="3" data-state="hidden"><button>${questionData[currentQuestion].choices[3]}</button></li>
+        </ol>
+    `
+    // Picking the <ol> element by id
+    let choiceButton = document.getElementById("choiceButton");
+    //For each choice in the array, a button is created dynamically 
+    //Event listener will listens for a click 
+    choiceButton.addEventListener("click", function () {
+    // When a button is clicked, the checkAnswer(index) function is called to check the answer
+        checkAnswer();
+    // Calling  displayQuestion() 
+        displayQuestion();
+    })
 
-    const actualQuestion = questionData[currentQuestion];
-    questionElement.textContent = actualQuestion.title;
-
-    choiceElement.innerHTML = ''; // Clear previous choices
-// Iterates through the choices array for the current question
-
-    actualQuestion.choices.forEach((choice, index) => {
-        // For each choice in the array, a button is created dynamically
-        const choiceButton = document.createElement('button');
-        // Text content set to the choice.
-        choiceButton.textContent = choice;
-        // An event listener is added to each button that listens for a click 
-        choiceButton.addEventListener('click', () => checkAnswer(index));
-        // Once a button is clicked, the checkAnswer(index) function is called with the index passed as an argument.
-        choiceElement.appendChild(choiceButton);
-    });
 }
 // Function to check the answers
 function checkAnswer(choiceIndex) {
 // Declaring choiceIndex
 // Declaring the current question and assigning the current object from questionData array 
-    const actualQuestion = questionData[currentQuestion];
-    // if users choise index is equal to answer index  alert('Correct!')
+    let actualQuestion = questionData[currentQuestion];
+// if users choise index is equal to answer index  alert('Correct!')
     if (choiceIndex === actualQuestion.answer) {
+        console.log(actualQuestion.answer)
         alert('Correct!');
-// if users choise index is not equal to answer index  alert('Incorrect!') and decrement 10 sec
+// if users choise index is not equal to answer index  alert('Incorrect!')
     } else {
-        gameTimer = gameTimer - 10;
         alert('Incorrect!');
+        // Handle incorrect answer action here
     }
-// Switch to the next question
+
     currentQuestion++;
-// if currentQuestion less than length of array of questionData - continue
+
     if (currentQuestion < questionData.length) {
         displayQuestion();
     } else {
-        // else - stop the quiz
-        stageInitials();
         alert('Quiz finished');
-
+        // Handle end of quiz actions here
     }
 }
+
+// function setChecking () {
+
+
+
+
+//     if (questionData[index].answer[0] !== 0) {
+//         console.log(questionData[index].choices[0])
+//         console.log(questionData[index].answer);
+//         gameTimer = gameTimer - 10;;
+//         console.log(gameTimer)
+//     }
+
+// }
+
+
+// function nextQuestion(event) {
+
+//     index++;
+//     displayQuestion();
+
+//     console.log(questionData[index].answer);
+
+//         let element = event.target;
+
+//         let state = element.getAttribute("data-state");
+//         console.log(state);
+
+
+
+
+// }
 
 
 
@@ -190,4 +313,4 @@ function stageHighscore() {
     //Dysplaing last saved data 
     highscoreList.textContent = input;
 
-};
+}; -->
