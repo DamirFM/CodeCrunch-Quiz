@@ -114,39 +114,30 @@ function checkAnswer(choiceIndex) {
 
     }
 }
-
-let initialInput = document.querySelector("#initial-input");
+// Picking the input by id
+let initialInput = document.getElementById("msg");
 
 function stageInitials() {
     quizPage.classList.add("hide");
     initialsPage.classList.remove("hide");
-    let scoreValue = timerOfGame.value;
-    timerOfGame.textContent = scoreValue;
-    console.log(scoreValue);
+
 
     signUpButton.addEventListener("click", function () {
+        let inputEl = initialInput.value;
+        console.log(inputEl)
 
 
-        let initial = initialInput.value;
-
-
-        if (initial === "") {
+        if (inputEl === "") {
             displayMessage("error", "Initial cannot be blank");
         } else {
             alert("Registered successfully");
 
-            localStorage.setItem("initial-input", initial);
+            localStorage.setItem("msg", inputEl);
 
             stageHighscore();
             highscorePage.classList.remove("hide");
         }
-
     });
-
-
-    //how I can take data from this section to next one
-
-
 };
 
 
