@@ -11,7 +11,6 @@ let choiceElement = document.getElementById('choices');
 // let finishButton = document.getElementById("finish-quiz");
 let timerOfGame = document.getElementById("timer");
 
-
 let gameTimer = 100;
 //Button which initialize game start
 startButton.addEventListener("click", startGame);
@@ -77,7 +76,7 @@ function displayQuestion() {
     questionElement.textContent = actualQuestion.title;
 
     choiceElement.innerHTML = ''; // Clear previous choices
-// Iterates through the choices array for the current question
+    // Iterates through the choices array for the current question
 
     actualQuestion.choices.forEach((choice, index) => {
         // For each choice in the array, a button is created dynamically
@@ -92,20 +91,20 @@ function displayQuestion() {
 }
 // Function to check the answers
 function checkAnswer(choiceIndex) {
-// Declaring choiceIndex
-// Declaring the current question and assigning the current object from questionData array 
+    // Declaring choiceIndex
+    // Declaring the current question and assigning the current object from questionData array 
     const actualQuestion = questionData[currentQuestion];
     // if users choise index is equal to answer index  alert('Correct!')
     if (choiceIndex === actualQuestion.answer) {
         alert('Correct!');
-// if users choise index is not equal to answer index  alert('Incorrect!') and decrement 10 sec
+        // if users choise index is not equal to answer index  alert('Incorrect!') and decrement 10 sec
     } else {
         gameTimer = gameTimer - 10;
         alert('Incorrect!');
     }
-// Switch to the next question
+    // Switch to the next question
     currentQuestion++;
-// if currentQuestion less than length of array of questionData - continue
+    // if currentQuestion less than length of array of questionData - continue
     if (currentQuestion < questionData.length) {
         displayQuestion();
     } else {
@@ -115,9 +114,6 @@ function checkAnswer(choiceIndex) {
 
     }
 }
-
-
-
 
 let initialInput = document.querySelector("#initial-input");
 
