@@ -14,35 +14,35 @@ The quiz on HTML, CSS, and JS is designed to engage participants in an interacti
 
 ### Welcome screen
 
-![Alt text](./Screenshots/1.png"Welcome screen")
+![Alt text](./Screenshots/1.png "Welcome screen")
 
 ### Question page
 
-![Alt text](./Screenshots/2.png"Question page")
+![Alt text](./Screenshots/2.png "Question page")
 
 ### Correct answer alert
 
-![Alt text](./Screenshots/3.png"Correct answer alert")
+![Alt text](./Screenshots/3.png "Correct answer alert")
 
 ### Next question
 
-![Alt text](./Screenshots/4.png"Next question")
+![Alt text](./Screenshots/4.png "Next question")
 
 ### Next question
 
-![Alt text](./Screenshots/5.png"Next question")
+![Alt text](./Screenshots/5.png "Next question")
 
 ### Finish quiz alert
 
-![Alt text](./Screenshots/6.png"Finish quiz alert")
+![Alt text](./Screenshots/6.png "Finish quiz alert")
 
 ### User name input
 
-![Alt text](./Screenshots/7.png"User name input")
+![Alt text](./Screenshots/7.png "User name input")
 
 ### List of saved scores
 
-![Alt text](./Screenshots/8.png"List of saved scores")
+![Alt text](./Screenshots/8.png "List of saved scores")
 
 
 ## Installation
