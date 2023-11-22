@@ -7,9 +7,18 @@ let signUpButton = document.querySelector("#sign-up");
 let startButton = document.getElementById("start-quiz");
 let questionElement = document.getElementById('question');
 let choiceElement = document.getElementById('choices');
+let initialInput = document.getElementById("msg");
+let scoresList = document.querySelector("#scores-list");
+let scoresForm = document.querySelector("#score-form");
+
+
+let scoresArray = [];
+
+let points = 0;
 
 // let finishButton = document.getElementById("finish-quiz");
 let timerOfGame = document.getElementById("timer");
+let pointsOfGame = document.getElementById("points");
 
 let gameTimer = 100;
 //Button which initialize game start
@@ -25,23 +34,26 @@ function startGame() {
     quizPage.classList.remove("hide");
     //Setting the timer
 
-    function setTime() {
-        // Sets interval in variable
-        let timerInterval = setInterval(function () {
-            gameTimer--;
-            timerOfGame.textContent = gameTimer + " seconds left";
 
-            if (gameTimer === 0 || gameTimer < 0) {
-                // Stops execution of action at set interval
-                clearInterval(timerInterval);
-                // Calls function to create and append image
-                stageInitials();
-            }
-        }, 1000);
-    }
-    setTime();
 };
 
+// Setting up the timer of the game
+let myInterval = setInterval(myTimer, 1000);
+
+function myTimer() {
+    // Decrement by one every each second
+    gameTimer--;
+    timerOfGame.textContent = gameTimer + " seconds left";
+    // Counting a points for the correct answers
+    pointsOfGame.textContent = points + " your score";
+
+    if (gameTimer === 0 || gameTimer < 0) {
+        // Stops execution of action at set interval
+        clearInterval(timerInterval);
+        // Calls function to create and append image
+        stageInitials();
+    };
+};
 
 //Database of questions questions
 let questionData = [{
@@ -65,16 +77,17 @@ let questionData = [{
     choices: ["function = myFunction() {}", "var function = myFunction() {}", "function myFunction() {}", "create function myFunction() {}"],
     answer: 2
 }];
-//starting number of arrays questions
+// Starting number of arrays questions
 let currentQuestion = 0;
 
-//function which shows the questions
+// Function which shows the questions
 
 function displayQuestion() {
-
-    const actualQuestion = questionData[currentQuestion];
+    // Declaring the actualQuestion and assigning the index from questionData
+    let actualQuestion = questionData[currentQuestion];
+    // div with the question assigning to the title - key from the questionData database
     questionElement.textContent = actualQuestion.title;
-
+    myTimer();
     choiceElement.innerHTML = ''; // Clear previous choices
     // Iterates through the choices array for the current question
 
@@ -88,17 +101,19 @@ function displayQuestion() {
         // Once a button is clicked, the checkAnswer(index) function is called with the index passed as an argument.
         choiceElement.appendChild(choiceButton);
     });
-}
+};
+
 // Function to check the answers
 function checkAnswer(choiceIndex) {
     // Declaring choiceIndex
     // Declaring the current question and assigning the current object from questionData array 
-    const actualQuestion = questionData[currentQuestion];
-    // if users choise index is equal to answer index  alert('Correct!')
+    let actualQuestion = questionData[currentQuestion];
+    // if users choise index is equal to answer index  alert('Correct!') and add 100 points
     if (choiceIndex === actualQuestion.answer) {
         alert('Correct!');
-        // if users choise index is not equal to answer index  alert('Incorrect!') and decrement 10 sec
+        points += 100;
     } else {
+        // if users choise index is not equal to answer index  alert('Incorrect!') and decrement 10 sec
         gameTimer = gameTimer - 10;
         alert('Incorrect!');
     }
@@ -111,70 +126,72 @@ function checkAnswer(choiceIndex) {
         // else - stop the quiz
         stageInitials();
         alert('Quiz finished');
-
     }
 }
-// Picking the input by id
-let initialInput = document.getElementById("msg");
-
+// section for initials
 function stageInitials() {
+    // Make section visible
     quizPage.classList.add("hide");
+    // Hide previous one
     initialsPage.classList.remove("hide");
+    highscorePage.classList.add("hide");
+    // visible
 
-
-    signUpButton.addEventListener("click", function () {
-        let inputEl = initialInput.value;
-        console.log(inputEl)
-
-
-        if (inputEl === "") {
-            displayMessage("error", "Initial cannot be blank");
-        } else {
-            alert("Registered successfully");
-
-            localStorage.setItem("msg", inputEl);
-
-            stageHighscore();
-            highscorePage.classList.remove("hide");
+    function storeScore() {
+        // Stringify and set key in localStorage to scoresArray array
+        localStorage.setItem("scoresArray", JSON.stringify(scoresArray));
+    }
+    // Add submit event to form 
+    scoresForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let scoreText = initialInput.value.trim();
+        // Return from function early if submitted scoreText is blank
+        if (scoreText === "") {
+            return;
         }
-    });
+        // Add new scoreText and points to todos scoresArray
+        scoresArray.push([scoreText] + [points]);
+        // Clear the input
+        initialInput.value = "";
+        // Store updated scoresArray in localStorage, re-render the list
+        storeScore();
+        renderScores();
+    })
+    stageHighscore();
+    
 };
 
-
-
-
-let scoresList = document.querySelector("#scores");
-let scoresCountSpan = document.querySelector("#scores-count")
-let winList = [];
-//Selecting ul whith ID scores 
-let highscoreList = document.querySelector("#scores");
-stageHighscore();
-function stageHighscore() {
+// Funtion that taking from the memory data about users
+function renderScores() {
     scoresList.innerHTML = "";
-    scoresCountSpan.textContent = winList.length;
-
-    for (var i = 0; i < winList.length; i++) {
-        let win = winList[i];
-
+    // scoresCount.textContent = scoresArray.length;
+    // Render a new li for each todo
+    for (let i = 0; i < scoresArray.length; i++) {
+        let score = scoresArray[i];
         let li = document.createElement("li");
-        li.textContent = win;
+        li.textContent = score;
         li.setAttribute("data-index", i);
-
-
         scoresList.appendChild(li);
     }
+}
+// Section with information about previous 
+function stageHighscore() {
 
-
-    //Hide previous section
-    initialsPage.classList.add("hide");
-
-
-    //Reading from the memory last saved data
-    let input = localStorage.getItem("scores");
-    if (!input) {
-        return;
+    highscorePage.classList.remove("hide");
+    function myStopFunction() {
+        clearInterval(myInterval);
     }
-    //Dysplaing last saved data 
-    highscoreList.textContent = input;
 
+    // This function is being called below and will run when the page loads.
+    function init() {
+        let storedScores = JSON.parse(localStorage.getItem("scoresArray"));
+        // If storedScores were retrieved from localStorage, update the todos array to it
+        if (storedScores !== null) {
+            scoresArray = storedScores;
+        }
+        // This is a helper function that will render scoresArray to the DOM
+        renderScores();
+    }
+    init()
+    myStopFunction()
 };

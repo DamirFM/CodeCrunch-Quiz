@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeCrunch-Quiz</title>
+    <link rel="stylesheet" href="./assets/reset.css">
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 
@@ -12,34 +13,35 @@
     <header>
         <h3>View highscore</h3>
         <h3 class="time">Timer:<span id="timer"></span></h3>
+        <h3 class="points">Points:<span id="points"></span></h3>
     </header>
     <section id="intro">
-        <h1>Coding quiz challange</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam explicabo optio dolorum,
-            asperiores laborum recusandae ex fuga libero rerum expedita cumque dolor commodi ad corporis accusantium
-            quisquam enim exercitationem.</p>
-        <button id="start-quiz">Start quiz</button>
+        <div class="introduction">
+            <h1>Coding quiz challange</h1>
+            <p>Welcome to the ultimate JavaScript, CSS, and HTML Quiz! 🚀 Test your knowledge of web development
+                fundamentals and scripting languages. Get ready to dive into the world of code and challenge yourself
+                with our interactive quiz!</p>
+        </div>
+        <div class="start-btn">
+            <button id="start-quiz">Start quiz</button>
+        </div>
     </section>
 
     <section class="hide" id="quiz">
         <div id="question"></div>
         <ol id="choices"></ol>
-        <button id="finish-quiz">Finish quiz</button>
     </section>
 
     <section class="hide" id="initials">
-        <label>Enter your initials</lable>
-            <input type="text" name="initial-input" id="msg" placeholder="Your initials" />
-     
-            <button id="sign-up">Sign Up</button>
+        <form id="score-form">
+            <label>Enter your initials</lable>
+                <input type="text" name="initial-input" id="msg" placeholder="Your initials" />
+        </form>
     </section>
 
     <section class="hide" id="highscore">
         <h2>Highscore</h2>
-        <p>Scores Count: <span id="scores-count">0</span></p>
-        <!-- look at act 26 -->
-        <ul id="scores"></ul>
-
+        <ul id="scores-list"></ul>
     </section>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./assets/script.js"></script>

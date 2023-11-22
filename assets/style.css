@@ -1,3 +1,74 @@
+/* class property for hiding sections */
 .hide {
     display: none;
+}
+/* Main colors */
+:root {
+--white: #ececec;
+--light: #9fd3c7;
+--dark-blue: #385170;
+--dark-blue1: #142d4c; 
+--border-radius: 30px;
+}
+body{
+    background-color: var(--white);
+}
+header{
+    margin: 2%;
+    padding: 3%;
+    font-size: 15px;
+    
+}
+header h3{
+    margin: 5px;
+    padding: 3px;
+}
+/* section with intro id */
+#intro {
+    width: 100%;
+    border: 2px solid #385170;
+    border-radius: var(--border-radius);
+    background-color: var(--dark-blue1);
+    color: var(--light);
+    text-align: center;
+}
+
+.introduction {
+    font-size: 15px;
+    line-height: 1.5;
+}
+/* section with the quiz id */
+#quiz {
+    text-align: center;
+}
+#start-quiz{
+    top: 40px;
+    position: relative;
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+}
+/* Properties for the questions */
+#question {
+    text-align: center;
+    width: 100%;
+    border: 2px solid #385170;
+    border-radius: var(--border-radius);
+    background-color: var(--dark-blue1);
+    color: var(--light);
+}
+
+#choices {
+    display: inline-grid;
+}
+/* Properties for all buttons */
+button {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    width: 250px;
+}
+#initials {
+    text-align: center;
+}
+#highscore {
+    text-align: center;
 }
