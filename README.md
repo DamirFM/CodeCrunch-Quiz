@@ -2,7 +2,7 @@
 
 Welcome, enthusiasts! 🌟 Get ready to journey through the HTML, CSS, and JS. This quiz is your gateway to exploring web development. Let's dive in and let the coding adventures begin!
 
-## Description
+## Description ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) 
 
 The quiz on HTML, CSS, and JS is designed to engage participants in an interactive and educational exploration of web development fundamentals. Through a series of thoughtfully crafted questions, it challenges your understanding of these core technologies. Each question presents a scenario or concept, prompting you to apply your knowledge and select the correct answer. For every each wrong answer timer will decrement 10 seconds of you time, but for correct you will get 100 points.
 
